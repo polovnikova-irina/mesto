@@ -1,0 +1,15 @@
+.photo {
+  list-style: none;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  grid-gap: 20px 0;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 1280px) {
+  .photo {
+    gap: 20px 17px;
+}
+}

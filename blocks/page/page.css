@@ -1,0 +1,25 @@
+.page {
+  min-width: 320px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+  background-color: #000;
+  color: #FFF;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    max-width: calc(100% - 100px * 2);
+    margin: 0 auto;
+}
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    max-width: calc(100% - 200px * 2);
+}
+}
+

@@ -1,0 +1,18 @@
+.photos {
+  max-width: calc(100% - 19px * 2);
+  margin-bottom: 53px;
+}
+
+@media screen and (min-width: 1280px) {
+  .photos {
+    max-width: calc(100% - 200px * 2);
+    margin: 0 auto;
+}
+}
+
+/*@media screen and (min-width: 768px) {
+  .photos {
+    max-width: calc(100% - 100px * 2);
+    margin: 0 auto;
+}
+}*/
