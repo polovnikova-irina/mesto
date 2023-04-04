@@ -1,12 +1,12 @@
  .header__line {
-  margin: 31.6px 0 42px;
+  margin: 31.6px 0 0;
   padding: 0;
   border-bottom: 1px solid #545454;
  }
 
  @media screen and (min-width: 768px) {
   .header {
-    margin: 41px auto 40px;
+    margin: 41px auto 0;
 }
 }
 

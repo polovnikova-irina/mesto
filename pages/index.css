@@ -20,6 +20,7 @@
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__info-wrapper/profile__info-wrapper.css);
 
 /*photos*/
 @import url(../blocks/photos/photos.css);
@@ -31,3 +32,7 @@
 @import url(../blocks/photo/__image/photo__image.css);
 @import url(../blocks/photo/__cell/photo__cell.css);
 @import url(../blocks/photo/__caption/photo__caption.css);
+
+/*footer*/
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);

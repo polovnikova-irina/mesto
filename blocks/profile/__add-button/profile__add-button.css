@@ -7,6 +7,17 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 16px;
+    margin-top: 19px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .profile__add-button {
+      width: 150px;
+      height: 50px;
+      margin-left: 244px;
+      margin-top: 2px;
+      background-size: 22px;
+  }
   }
 
 
