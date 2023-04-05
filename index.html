@@ -24,9 +24,9 @@
   <div class="profile__info-wrapper">
   <ul class="profile__info">
     <li><h1 class="profile__title">Жак-Ив Кусто</h1></li>
-    <li><button class="profile__edit-button" type="button"></button></li>
+    <li><button class="profile__edit-button" type="submit"></button></li>
   </ul>
-  <p class="profile__subtitle" type="button">Исследователь океана</p>
+  <p class="profile__subtitle" type="submit">Исследователь океана</p>
  </div>
   <button class="profile__add-button" type="button"></button>
 </section>
@@ -38,7 +38,7 @@
       <img class="photo__image" src="images/photo-elbrus.jpg" alt="Эльбрус">
       <div class="photo__caption">
         <p class="photo__title">Гора Эльбрус</p>
-        <img class="photo__like" src="images/photo-like.svg" alt="Лайк">
+        <button class="photo__like" type="button"><img src="images/photo-like.svg" alt="Лайк"></button>
       </div>
     </li>
 
@@ -46,7 +46,7 @@
       <img class="photo__image" src="images/photo-dombay.jpg" alt="Домбай">
         <div class="photo__caption">
           <p class="photo__title">Домбай</p>
-          <img class="photo__like" src="images/photo-like.svg" alt="Лайк">
+          <button class="photo__like" type="button"><img src="images/photo-like.svg" alt="Лайк"></button>
         </div>
     </li>
 
@@ -54,7 +54,7 @@
       <img class="photo__image" src="images/photo-altai.jpg" alt="Алтай">
         <div class="photo__caption">
           <p class="photo__title">Алтай - Кучерлинские озера</p>
-          <img class="photo__like" src="images/photo-like.svg" alt="Лайк">
+          <button class="photo__like" type="button"><img src="images/photo-like.svg" alt="Лайк"></button>
         </div>
     </li>
 
@@ -62,7 +62,7 @@
       <img class="photo__image" src="images/photo-elbrus.jpg" alt="Байкал">
       <div class="photo__caption">
         <p class="photo__title">Озеро Байкал</p>
-        <img class="photo__like" src="images/photo-like.svg" alt="Лайк">
+        <button class="photo__like" type="button"><img src="images/photo-like.svg" alt="Лайк"></button>
       </div>
     </li>
 
@@ -70,7 +70,7 @@
       <img class="photo__image" src="images/photo-elbrus.jpg" alt="Камчатка">
         <div class="photo__caption">
           <p class="photo__title">Камчатка</p>
-          <img class="photo__like" src="images/photo-like.svg" alt="Лайк">
+          <button class="photo__like" type="button"><img src="images/photo-like.svg" alt="Лайк"></button>
         </div>
     </li>
 
@@ -78,7 +78,7 @@
       <img class="photo__image" src="images/photo-karachaevsk.jpg" alt="Карачаевск">
         <div class="photo__caption">
           <p class="photo__title">Карачаево-Черкессия</p>
-          <img class="photo__like" src="images/photo-like.svg" alt="Лайк">
+          <button class="photo__like" type="button"><img src="images/photo-like.svg" alt="Лайк"></button>
         </div>
     </li>
 </section>
@@ -90,14 +90,17 @@
 </footer>
 
 
-<!--<section class="popup">
-  <h2 class="popup__title">Редактировать профиль</h2>
-  <input type="text" class="popup__item popup__item_el_title" placeholder="Иванов Иван" required>
-  <input type="text" class="popup__item popup__item_el_subtitle" placeholder="Иванов Иван" required>
-  <button class="popup__submit-button">Сохранить</button>
+<section class="popup">
+    <form class="popup__container">
+    <button class="popup__close-button"></button>
+    <h2 class="popup__title">Редактировать профиль</h2>
+    <input type="text" class="popup__item popup__item_el_title" name="firstname"  placeholder="Жак-Ив Кусто">
+    <input type="text" class="popup__item popup__item_el_subtitle" name="information" placeholder="Исследователь океана">
+    <button class="popup__submit-button" type="submit" value="Сохранить">Сохранить</button>
+  </form>
 </section>
 
-</div>-->
+</div>
 
 <script src="script.js"></script>
 </body>

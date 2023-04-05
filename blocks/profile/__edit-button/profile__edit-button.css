@@ -8,6 +8,7 @@
   border: 1px solid #FFF;
   background-color: #000;
   margin-top: 3px;
+  transition: opacity 0.3s linear;
 }
 
 @media screen and (min-width: 1024px) {
@@ -16,4 +17,8 @@
     height: 24px;
     margin-top: 14px;
 }
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
 }

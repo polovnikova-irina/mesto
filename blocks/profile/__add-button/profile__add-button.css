@@ -8,6 +8,7 @@
     background-position: center;
     background-size: 16px;
     margin-top: 19px;
+    transition: opacity 0.3s linear;
   }
 
   @media screen and (min-width: 1024px) {
@@ -20,4 +21,6 @@
   }
   }
 
-
+  .profile__add-button:hover {
+    opacity: 0.6;
+  }
