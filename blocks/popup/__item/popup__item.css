@@ -1,6 +1,6 @@
 .popup__item {
   box-sizing: border-box;
-  width: 358px;
+  width: 238px;
   height: 27px;
   color:black;
   font-style: normal;
@@ -8,7 +8,15 @@
   font-size: 14px;
   line-height: 17px;
   border:none;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   row-gap: 30px;
-  margin-left: 36px;
+  margin-left: 22px;
+}
+
+@media screen and (min-width: 1024px) {
+  .popup__item {
+    width: 358px;
+    row-gap: 30px;
+    margin-left: 36px;
+}
 }

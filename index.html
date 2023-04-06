@@ -91,13 +91,15 @@
 
 
 <section class="popup">
-    <form class="popup__container">
+    <div class="popup__container">
     <button class="popup__close-button"></button>
     <h2 class="popup__title">Редактировать профиль</h2>
-    <input type="text" class="popup__item popup__item_el_title" name="firstname"  placeholder="Жак-Ив Кусто">
-    <input type="text" class="popup__item popup__item_el_subtitle" name="information" placeholder="Исследователь океана">
-    <button class="popup__submit-button" type="submit" value="Сохранить">Сохранить</button>
-  </form>
+    <form class="popup__form">
+      <input type="text" class="popup__item popup__item_el_title" name="firstname" minlength="2" maxlength="25"  placeholder="Жак-Ив Кусто">
+      <input type="text" class="popup__item popup__item_el_subtitle" name="information" minlength="2" maxlength="37" placeholder="Исследователь океана">
+      <input class="popup__save-button" type="submit" value="Сохранить"></input>
+    </form>
+  </div>
 </section>
 
 </div>
