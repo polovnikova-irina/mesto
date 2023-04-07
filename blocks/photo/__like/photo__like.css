@@ -1,16 +1,22 @@
 .photo__like {
+  background-image: url(../../../images/photo-like-white.svg);
   width: 22px;
   height: 19px;
-  object-fit: cover;
-  margin-right: 5px;
   border: none;
-  background-color: #fff;
-  box-sizing: border-box;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
   transition: opacity 0.3 liner;
+  justify-self: flex-end;
+  margin: 0;
 }
 
 .photo__like:hover {
   opacity: 0.6;
+}
+
+.photo__like_active {
+  background-image: url(../../../images/photo-like-black.png);
 }
 
 

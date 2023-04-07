@@ -2,6 +2,7 @@
     width: 282px;
     height: 50px;
     border: 2px solid #FFF;
+    box-sizing: border-box;
     background-color: #000;
     background-image: url("../../../images/profile-add-button.svg");
     background-repeat: no-repeat;
@@ -10,19 +11,24 @@
     margin-top: 19px;
     margin-right: 0;
     transition: opacity 0.3s linear;
+    padding: 0;
   }
 
   @media screen and (min-width: 1024px) {
     .profile__add-button {
       width: 150px;
       height: 50px;
-      margin-left: 244px;
       margin-top: 2px;
       background-size: 22px;
-      margin-right: 0;
+      margin-left: auto;
   }
   }
 
+  @media screen and (min-width: 1280px) {
+    .profile__add-button {
+      margin-left: 295px;
+  }
+  }
   .profile__add-button:hover {
     opacity: 0.6;
   }

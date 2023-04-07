@@ -9,8 +9,12 @@
   line-height: 17px;
   border:none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  row-gap: 30px;
+  margin-bottom: 30px;
   margin-left: 22px;
+}
+
+.popup__item:focus {
+  outline-width: 0px;
 }
 
 @media screen and (min-width: 1024px) {
