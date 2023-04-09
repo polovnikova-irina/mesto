@@ -1,7 +1,6 @@
 .profile__info {
   margin: 25px 0 0 26px;
   padding: 0;
-  list-style: none;
   display: flex;
   align-items: center;
   column-gap: 10px;
@@ -9,8 +8,8 @@
 
 @media screen and (min-width: 1024px) {
   .profile__info {
-  margin: 5px 0 5px 30px;
-  align-items: flex-start;
-  column-gap: 18px;
+    margin: 5px 0 5px 30px;
+    align-items: flex-start;
+    column-gap: 18px;
 }
 }

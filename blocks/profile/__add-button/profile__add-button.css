@@ -12,6 +12,8 @@
     margin-right: 0;
     transition: opacity 0.3s linear;
     padding: 0;
+    cursor: pointer;
+    border-radius: 2px;
   }
 
   @media screen and (min-width: 1024px) {
@@ -24,11 +26,6 @@
   }
   }
 
-  @media screen and (min-width: 1280px) {
-    .profile__add-button {
-      margin-left: 295px;
-  }
-  }
   .profile__add-button:hover {
     opacity: 0.6;
   }

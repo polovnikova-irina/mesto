@@ -9,6 +9,7 @@
   background-color: #000;
   margin-top: 3px;
   transition: opacity 0.3s linear;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1024px) {

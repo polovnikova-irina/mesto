@@ -3,15 +3,9 @@
   margin: 36px auto;
 }
 
-@media screen and (min-width: 780px) {
-  .photos {
-    max-width: calc(100% - 100px * 2);
-    margin: 52px auto;
-}
-}
-
 @media screen and (min-width: 1280px) {
   .photos {
-    max-width: calc(100% - 200px * 2);
+    padding: 0 15%;
+    margin-top: 52px;
 }
 }

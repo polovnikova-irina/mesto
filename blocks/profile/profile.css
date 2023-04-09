@@ -10,15 +10,15 @@
 
 @media screen and (min-width: 1024px) {
   .profile {
-  max-width: calc(100% - 100px * 2);
-  flex-direction: row;
-  margin-top: 43px;
+    max-width: calc(100% - 100px * 2);
+    flex-direction: row;
+    margin-top: 43px;
 }
 }
 
 @media screen and (min-width: 1280px) {
   .profile {
-  max-width: calc(100% - 200px * 2);
+    max-width: calc(100% - 200px * 2);
 }
 }
 
