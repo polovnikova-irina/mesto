@@ -3,9 +3,9 @@
   margin: 36px auto;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1024px) {
   .photos {
     padding: 0 15%;
-    margin-top: 52px;
+    margin-top: 48px;
 }
 }
