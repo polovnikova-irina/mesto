@@ -28,4 +28,4 @@
 
 ### Планируемые улучшения
 
-### [Ссылка на проект](https://polovnikova-irina.github.io/mesto/index.html)
+### [Ссылка на сайт](https://polovnikova-irina.github.io/mesto/index.html)
