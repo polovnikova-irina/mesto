@@ -10,7 +10,7 @@
   text-align: center;
   cursor: pointer;
   transition: opacity 0.3s linear;
-  margin: 15px 22px 0;
+  margin: 19px 0 0;
   padding: 0;
   border: none;
   border-radius: 2px;
@@ -26,6 +26,6 @@
     height: 50px;
     font-size: 18px;
     line-height: 22px;
-    margin: 18px 36px 0;
+    margin: 22px 13px 11px;
 }
 }
