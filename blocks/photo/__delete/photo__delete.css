@@ -1,5 +1,5 @@
-.photo__like {
-  background-image: url(../../../images/photo-like-white.svg);
+.photo__delete {
+  background-image: url(../../../images/photo-delete.svg);
   width: 22px;
   height: 19px;
   border: none;
@@ -7,14 +7,14 @@
   background-size: contain;
   background-repeat: no-repeat;
   transition: opacity 0.3 liner;
-  justify-self: flex-end;
   margin: 0;
   cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
 }
 
-.photo__like:hover {
+.photo__delete:hover {
   opacity: 0.5;
 }
-
-
-
