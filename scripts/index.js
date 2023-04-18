@@ -1,7 +1,7 @@
 import { initialCards } from "./constants.js"
 
 const popup = document.querySelector('.popup');
-const openPopupButton = document.querySelector('.profile__edit-button');
+const openPopupBtnEdit = document.querySelector('.profile__edit-button');
 const closePopupButton = document.querySelector('.popup__close-button');
 const formElement = document.querySelector('.popup__form');
 const nameInput = document.querySelector('.popup__item_el_title');
@@ -12,17 +12,27 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 const photoTemplate = document.getElementById('photo-template');
 const photoContainer = document.querySelector('.photo');
 
-const openPopupAddButton = document.querySelector('.profile__add-button');
+const openPopupBtnAdd = document.querySelector('.profile__add-button');
 const photoNameInput = document.querySelector('.popup__item_el_photo-name');
 const linkInput = document.querySelector('.popup__item_el_link');
 
+const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
+const popupTypeAddCard = document.querySelector('.popup_type_add-card');
+const popupTypeZoomImage = document.querySelector('.popup_type_zoom-image');
 
 //1
-function openPopup() {
-  popup.classList.add('popup_opened');
+function openPopupTypeEditProfile() {
+  popupTypeEditProfile.classList.add('popup_opened');
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
-  zoomImage.classList.add('popup_opened');
+}
+
+function openPopupTypeAddCard() {
+  popupTypeAddCard.classList.add('popup_opened');
+}
+
+function openPopupTypeZoomImage() {
+  popupTypeZoomImage.classList.add('popup_opened');
 }
 
 function closePopup() {
@@ -36,11 +46,11 @@ function handleFormSubmit (evt) {
   closePopup();
 }
 
-openPopupButton.addEventListener('click', openPopup);
-closePopupButton.addEventListener('click', closePopup);
 formElement.addEventListener('submit', handleFormSubmit);
+openPopupBtnEdit.addEventListener('click', openPopupTypeEditProfile);
+openPopupBtnAdd.addEventListener('click', openPopupTypeAddCard);
 
-openPopupAddButton.addEventListener('click', openPopup);
+closePopupButton.addEventListener('click', closePopup);
 
 
 //2
@@ -67,14 +77,15 @@ const createPhotoElement = (photoData) => {
   photoDeleteButton.addEventListener('click', handleDelete);
   photoLikeButton.addEventListener('click', handleLike);
 
+
   const zoomImage = document.querySelector('.popup__image-zoom');
   const zoomImageTitle = document.querySelector('.popup__image-title');
 
   const zoomCard = () => {
     zoomImage.src = photoData.link;
+    zoomImage.alt = photoData.name;
     zoomImageTitle.textContent = photoData.name;
-    zoomImage.classList.toggle('popup_opened');
-    openPopup();
+    openPopupTypeZoomImage();
   }
 
   photoImage.addEventListener('click', zoomCard);
