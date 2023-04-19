@@ -77,7 +77,7 @@ const createPhotoElement = (photoData) => {
   photoDeleteButton.addEventListener('click', handleDelete);
   photoLikeButton.addEventListener('click', handleLike);
 
-
+//3
   const zoomImage = document.querySelector('.popup__image-zoom');
   const zoomImageTitle = document.querySelector('.popup__image-title');
 
@@ -91,15 +91,47 @@ const createPhotoElement = (photoData) => {
   photoImage.addEventListener('click', zoomCard);
 
   return photoElement;
+
 };
 
-
+//2
 initialCards.forEach((photo) => {
   const element = createPhotoElement(photo);
   photoContainer.prepend(element);
 });
 
 
+//4
+   const handleFormSubmitCard = (evt) => {
+    evt.preventDefault();
+
+    const namePhotoInput = document.querySelector('.popup__item_el_photo-name');
+    const nameLinkInput = document.querySelector('.popup__item_el_link');
+    const name = namePhotoInput.value.trim();
+    const link = nameLinkInput.value.trim();
+
+    const card = {
+      name: name,
+      link: link
+    };
+
+    initialCards.unshift(card);
+
+    namePhotoInput.value = "";
+    nameLinkInput.value = "";
+  };
+
+formElement.addEventListener('submit', handleFormSubmitCard);
+
+initialCards.forEach(card => {
+  const cardElement = photoTemplate.content.querySelector('.photo__cell').cloneNode(true);
+
+  cardElement.querySelector('.photo__image').src = card.link;
+  cardElement.querySelector('.photo__image').alt = card.name;
+  cardElement.querySelector('.photo__title').textContent = card.name;
+
+  photoContainer.appendChild(cardElement);
+});
 
 
 

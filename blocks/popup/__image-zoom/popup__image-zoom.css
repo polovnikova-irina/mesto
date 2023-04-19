@@ -1,4 +1,5 @@
 .photo__image-zoom {
-  max-width: 75vw;
-  height: 75vh;
+  max-width: 100%;
+  height: 100%;
 }
+
