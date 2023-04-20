@@ -1,9 +1,8 @@
 .photo__like {
+  all: unset;
   background-image: url(../../../images/photo-like-white.svg);
   width: 22px;
   height: 19px;
-  border: none;
-  background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
   transition: opacity 0.3 liner;
