@@ -56,7 +56,7 @@ closePopupBtnEdit.addEventListener('click', () => { togglePopup('editProfile', '
 closePopupBtnAdd.addEventListener('click', () => { togglePopup('addCard', 'close') });
 closePopupBtnZoom.addEventListener('click', () => { togglePopup('zoomImage', 'close') });
 
-function handleFormSubmit (evt) {
+function handleFormSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
@@ -89,7 +89,7 @@ const createPhotoElement = (photoData) => {
   photoDeleteButton.addEventListener('click', handleDelete);
   photoLikeButton.addEventListener('click', handleLike);
 
-//zoomImage
+  //zoomImage
   const zoomImage = document.querySelector('.popup__image_type_zoom-image');
   const zoomImageTitle = document.querySelector('.popup__caption_type_zoom-image');
 
