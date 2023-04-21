@@ -1,4 +1,4 @@
-.popup__image-title {
+.popup__caption_type_zoom-image {
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -7,3 +7,5 @@
   margin-top: 10px;
   padding: 0;
 }
+
+

@@ -2,7 +2,7 @@ import { initialCards } from "./constants.js"
 
 const popup = document.querySelector('.popup');
 const openPopupBtnEdit = document.querySelector('.profile__edit-button');
-const closePopupButton = document.querySelector('.popup__close-button');
+const closePopupBtnEdit = document.querySelector('.popup__close-button');
 const formElement = document.querySelector('.popup__form');
 const nameInput = document.querySelector('.popup__item_el_title');
 const jobInput = document.querySelector('.popup__item_el_subtitle');
@@ -26,46 +26,44 @@ const closePopupBtnAdd = document.querySelector('.popup__close-button_type_add-c
 const closePopupBtnZoom = document.querySelector('.popup__close-button_type_zoom-image')
 
 //EditProfile
-function openPopupTypeEditProfile() {
-  popupTypeEditProfile.classList.add('popup_opened');
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileSubtitle.textContent;
-}
 
-function openPopupTypeAddCard() {
-  popupTypeAddCard.classList.add('popup_opened');
-}
+const togglePopup = (popupType, action) => {
+  if (action === 'open') {
+    if (popupType === 'editProfile') {
+      popupTypeEditProfile.classList.add('popup_opened');
+      nameInput.value = profileTitle.textContent;
+      jobInput.value = profileSubtitle.textContent;
+    } else if (popupType === 'addCard') {
+      popupTypeAddCard.classList.add('popup_opened');
+    } else if (popupType === 'zoomImage') {
+      popupTypeZoomImage.classList.add('popup_opened');
+    }
+  } else if (action === 'close') {
+    if (popupType === 'editProfile') {
+      popupTypeEditProfile.classList.remove('popup_opened');
+    } else if (popupType === 'addCard') {
+      popupTypeAddCard.classList.remove('popup_opened');
+    } else if (popupType === 'zoomImage') {
+      popupTypeZoomImage.classList.remove('popup_opened');
+    }
+  }
+};
 
-function openPopupTypeZoomImage() {
-  popupTypeZoomImage.classList.add('popup_opened');
-}
+openPopupBtnEdit.addEventListener('click', () => { togglePopup('editProfile', 'open') });
+openPopupBtnAdd.addEventListener('click', () => { togglePopup('addCard', 'open') });
 
-function closePopup() {
-  popupTypeEditProfile.classList.remove('popup_opened');
-}
-
-function closePopupAdd() {
-  popupTypeAddCard.classList.remove('popup_opened');
-}
-
-function closePopupZoom() {
-  popupTypeZoomImage.classList.remove('popup_opened');
-}
+closePopupBtnEdit.addEventListener('click', () => { togglePopup('editProfile', 'close') });
+closePopupBtnAdd.addEventListener('click', () => { togglePopup('addCard', 'close') });
+closePopupBtnZoom.addEventListener('click', () => { togglePopup('zoomImage', 'close') });
 
 function handleFormSubmit (evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
-  closePopup();
+  togglePopup('editProfile', 'close');
 }
 
 formElement.addEventListener('submit', handleFormSubmit);
-
-openPopupBtnEdit.addEventListener('click', openPopupTypeEditProfile);
-openPopupBtnAdd.addEventListener('click', openPopupTypeAddCard);
-closePopupButton.addEventListener('click', closePopup);
-closePopupBtnAdd.addEventListener('click', closePopupAdd);
-closePopupBtnZoom.addEventListener('click', closePopupZoom);
 
 //6cards,like,delete
 const createPhotoElement = (photoData) => {
@@ -92,21 +90,21 @@ const createPhotoElement = (photoData) => {
   photoLikeButton.addEventListener('click', handleLike);
 
 //zoomImage
-  const zoomImage = document.querySelector('.popup__image-zoom');
-  const zoomImageTitle = document.querySelector('.popup__image-title');
+  const zoomImage = document.querySelector('.popup__image_type_zoom-image');
+  const zoomImageTitle = document.querySelector('.popup__caption_type_zoom-image');
 
   const zoomCard = () => {
-    openPopupTypeZoomImage();
+    togglePopup('zoomImage', 'open');
     zoomImage.src = photoData.link;
     zoomImage.alt = photoData.name;
     zoomImageTitle.textContent = photoData.name;
   }
-  closePopupZoom();
+  togglePopup('zoomImage', 'close');
   photoImage.addEventListener('click', zoomCard);
 
   return photoElement;
-
 };
+
 
 //AddPhoto
 const handleAddFormSubmit = (evt) => {
@@ -123,7 +121,7 @@ const handleAddFormSubmit = (evt) => {
   const element = createPhotoElement(card);
   photoContainer.prepend(element);
 
-  closePopupAdd();
+  togglePopup('addCard', 'close');
 };
 
 initialCards.forEach((photo) => {

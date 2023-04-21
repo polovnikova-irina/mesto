@@ -5,7 +5,7 @@
   height: 19px;
   background-size: contain;
   background-repeat: no-repeat;
-  transition: opacity 0.3 liner;
+  transition: opacity 0.1 linear;
   justify-self: flex-end;
   margin: 0;
   cursor: pointer;
