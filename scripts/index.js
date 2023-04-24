@@ -1,5 +1,3 @@
-import { initialCards } from "./constants.js"
-
 const popup = document.querySelector('.popup');
 const openPopupBtnEdit = document.querySelector('.profile__edit-button');
 const closePopupBtnEdit = document.querySelector('.popup__close-button');
