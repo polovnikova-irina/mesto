@@ -42,11 +42,13 @@
       <div class="popup__container popup__container_type_frame">
         <button class="popup__close-button popup__close-button_type_edit" type="button" aria-label="Закрыть"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popupEditForm">
-          <input type="text" class="popup__item popup__item_el_title" name="firstname" minlength="2" placeholder="Имя"
+        <form class="popup__form" name="popupEditForm" novalidate>
+          <input id="name-input"  type="text" class="popup__item popup__item_el_title" name="firstname" minlength="2" maxlength="40"  placeholder="Имя"
             required>
-          <input type="text" class="popup__item popup__item_el_subtitle" name="information" minlength="2"
+            <span class="name-input-error popup__input-error"></span>
+          <input id="about-input"  type="text" class="popup__item popup__item_el_subtitle" name="information" minlength="2" maxlength="200"
             placeholder="О себе" required>
+            <span class="about-input-error popup__input-error"></span>
           <input class="popup__save-button" type="submit" value="Сохранить">
         </form>
       </div>
@@ -58,10 +60,12 @@
         <button class="popup__close-button popup__close-button_type_add-card" type="button"
           aria-label="Закрыть"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="popupEditForm">
-          <input type="text" class="popup__item popup__item_el_photo-name" name="name" placeholder="Название" required>
-          <input type="text" class="popup__item popup__item_el_link" name="link" placeholder="Ссылка на картинку"
+        <form class="popup__form" name="popupEditForm" novalidate>
+          <input id="photo-name-input" type="text" class="popup__item popup__item_el_photo-name" name="name" placeholder="Название"  minlength="2" maxlength="30" required>
+          <span class="photo-name-input-error popup__input-error"></span>
+          <input id="photo-link-input" type="text" class="popup__item popup__item_el_link" name="link" placeholder="Ссылка на картинку" pattern="https?://.*\.(png|jpg|jpeg|gif)"
             required>
+          <span class="photo-link-input-error popup__input-error"></span>
           <input class="popup__save-button" type="submit" value="Сохранить">
         </form>
       </div>
@@ -73,14 +77,13 @@
       <div class="popup__container popup__container_type_zoom-image">
         <button class="popup__close-button popup__close-button_type_zoom-image" type="button"
           aria-label="Закрыть"></button>
-          <figure>
+        <figure>
           <img class="popup__image popup__image_type_zoom-image"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз" />
+            src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз" />
           <figcaption class="popup__caption popup__caption_type_zoom-image"></figcaption>
-         </figure>
+        </figure>
       </div>
     </div>
-
 
     <template id="photo-template">
       <li class="photo__cell">
@@ -97,8 +100,8 @@
   </div>
 
   <script src="./scripts/constants.js"></script>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
-
 </body>
 
 </html>
