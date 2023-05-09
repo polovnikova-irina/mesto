@@ -39,8 +39,8 @@ button.classList.add(inactiveButtonClass);
 button.setAttribute('disabled', true);
 }
 
-const hasInvalidInput = (formInput, { inputSelector }) => {
-  return Array.from(formElement.querySelectorAll(inputSelector)).some(item => {
+const hasInvalidInput = (formElement) => {
+  return formElement.some(item => {
     return !item.validity.valid;
   });
 }
@@ -61,13 +61,13 @@ const setEventListeners = (formElement, { inputSelector, submitButtonSelector, .
   });
 }
 
-const enableValidation = (validationConfig) => {
-  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
+const enableValidation = ({formSelector, ...rest}) => {
+  const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement, validationConfig);
+    setEventListeners(formElement, rest);
   });
 }
 
