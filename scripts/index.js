@@ -33,8 +33,8 @@ const zoomImageTitle = document.querySelector('.popup__caption_type_zoom-image')
 //function openPopup
 const openPopup = (popupType) => {
   popupType.classList.add('popup_opened');
-  document.addEventListener('keydown', handleEscClosePopup);
-  document.addEventListener('click', handleOverlayClick);
+  document.addEventListener('keydown', handleClosePopupByEsc);
+  document.addEventListener('click', handleClosePopupByOverlay);
 };
 
 openPopupBtnEdit.addEventListener('click', function(evt) {
@@ -48,8 +48,8 @@ openPopupBtnAdd.addEventListener('click', () => openPopup(popupTypeAddCard));
 //function сlosePopup
 const closePopup = (popupType) => {
   popupType.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleEscClosePopup);
-  document.removeEventListener('click', handleOverlayClick);
+  document.removeEventListener('keydown', handleClosePopupByEsc);
+  document.removeEventListener('click', handleClosePopupByOverlay);
 };
 
 closePopupBtnEdit.addEventListener('click', () => closePopup(popupTypeEditProfile));
@@ -57,7 +57,7 @@ closePopupBtnAdd.addEventListener('click', () => closePopup(popupTypeAddCard));
 closePopupBtnZoom.addEventListener('click', () => closePopup(popupTypeZoomImage));
 
 //function escClosePopup
-const handleEscClosePopup = (evt) => {
+const handleClosePopupByEsc = (evt) => {
   if (evt.key === 'Escape') {
     allPopup.forEach((popup) => {
       closePopup(popup);
@@ -66,7 +66,7 @@ const handleEscClosePopup = (evt) => {
 }
 
 //function overlayClosePopup
-const handleOverlayClick = (evt) => {
+const handleClosePopupByOverlay = (evt) => {
   if (evt.target.classList.contains('popup_opened')) {
     allPopup.forEach((popup) => {
       closePopup(popup);
@@ -149,16 +149,6 @@ initialCards.forEach((photo) => {
 formElementTypeAddCard.addEventListener('submit', handleAddFormSubmit);
 
 
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
-enableValidation(validationConfig);
 
 
 
