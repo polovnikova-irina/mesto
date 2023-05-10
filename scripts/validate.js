@@ -21,11 +21,11 @@ const hideInputError = (formElement, inputElement, { inputErrorClass, errorClass
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement, validationConfig) => {
+const checkInputValidity = (formElement, inputElement, rest) => {
   if (!inputElement.checkValidity()) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, validationConfig);
+    showInputError(formElement, inputElement, inputElement.validationMessage, rest);
   } else {
-    hideInputError(formElement, inputElement, validationConfig);
+    hideInputError(formElement, inputElement, rest);
   }
 }
 
@@ -48,14 +48,14 @@ const hasInvalidInput = (formElement) => {
 const setEventListeners = (formElement, { inputSelector, submitButtonSelector, ...rest }) => {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const formButton = formElement.querySelector(submitButtonSelector);
-  disableBtn(formButton, validationConfig);
+  disableBtn(formButton, rest);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement, rest);
-      if (hasInvalidInput(inputList, validationConfig)) {
-        disableBtn(formButton, validationConfig);
+      if (hasInvalidInput(inputList, rest)) {
+        disableBtn(formButton, rest);
       } else {
-        enableBtn(formButton, validationConfig);
+        enableBtn(formButton, rest);
       }
     });
   });

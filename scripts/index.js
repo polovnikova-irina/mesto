@@ -40,10 +40,17 @@ const openPopup = (popupType) => {
 openPopupBtnEdit.addEventListener('click', function(evt) {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
-  openPopup(popupTypeEditProfile)
+  disableBtn(popupTypeEditProfile.querySelector('.popup__save-button'), { inactiveButtonClass: 'popup__save-button_inactive'});
+  openPopup(popupTypeEditProfile);
 });
 
-openPopupBtnAdd.addEventListener('click', () => openPopup(popupTypeAddCard));
+openPopupBtnAdd.addEventListener('click', function(evt) {
+  namePhotoInput.value = '';
+  nameLinkInput.value = '';
+  disableBtn(popupTypeAddCard.querySelector('.popup__save-button'), { inactiveButtonClass: 'popup__save-button_inactive'});
+  openPopup(popupTypeAddCard);
+});
+
 
 //function сlosePopup
 const closePopup = (popupType) => {

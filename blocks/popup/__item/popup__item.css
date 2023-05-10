@@ -14,7 +14,7 @@
   }
 
 .popup__item:focus {
-  outline-width: 0px;
+  outline: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (min-width: 1024px) {
