@@ -69,8 +69,8 @@ openPopupBtnAdd.addEventListener('click', function(evt) {
 //function сlosePopup
 const closePopup = (popupType) => {
   popupType.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handlePopupKeyDownByEsc);
-  document.removeEventListener('click', handlePopupClose );
+  document.removeEventListener('keydown', (evt) => handlePopupKeyDownByEsc(evt, popupType));
+  document.removeEventListener('click', (evt) => handlePopupClose(evt, popupType));
 };
 
 closePopupBtnEdit.addEventListener('click', () => closePopup(popupTypeEditProfile));
