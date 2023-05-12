@@ -4,6 +4,7 @@
   background-image: url("../../../images/profile-edit-button.svg");
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
   border: 1px solid #FFF;
   background-color: #000;
   margin-top: 8px;
