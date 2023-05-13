@@ -22,8 +22,6 @@
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
-            < ! - - Подскажите, пожалуйста, почему, если сайт открыть с телефона (айфон 11), то кнопка редактировать становится прямоугольной(меняет размер по горизонтали), 
-               но если поставить разрешение телефона с компьютера, то размеры кнопки правильные. В предыдущем ревью посоветовали поставить min-width и убрать отступы, не помогло-->
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
@@ -42,7 +40,7 @@
 
     <div class="popup popup_type_edit-profile">
       <div class="popup__container popup__container_type_frame">
-        <button class="popup__close-button popup__close-button_type_edit" type="button" aria-label="Закрыть"></button>
+        <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popupEditForm" novalidate>
           <input id="name-input"  type="text" class="popup__item popup__item_el_title" name="firstname" minlength="2" maxlength="40"  placeholder="Имя"
@@ -59,7 +57,7 @@
 
     <div class="popup popup_type_add-card">
       <div class="popup__container popup__container_type_frame">
-        <button class="popup__close-button popup__close-button_type_add-card" type="button"
+        <button class="popup__close-button" type="button"
           aria-label="Закрыть"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="popupEditForm" novalidate>
