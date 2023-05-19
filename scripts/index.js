@@ -1,3 +1,5 @@
+//import { Card } from './Card';
+
 //popupTypeEditProfile
 const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
 const openPopupBtnEdit = document.querySelector('.profile__edit-button');
@@ -19,8 +21,7 @@ const namePhotoInput = document.querySelector('.popup__item_el_photo-name');
 const nameLinkInput = document.querySelector('.popup__item_el_link');
 
 //photoTemplate
-const photoTemplate = document.getElementById('photo-template');
-const photoContainer = document.querySelector('.photo');
+const cardContainer = document.querySelector('.photo');
 
 //popupTypeZoomImage
 const popupTypeZoomImage = document.querySelector('.popup_type_zoom-image');
@@ -31,17 +32,17 @@ const zoomImageTitle = document.querySelector('.popup__caption_type_zoom-image')
 
 //function escClosePopup and overlayClosePopup
 const handlePopupClose = (evt) => {
-  const popupOpened = document.querySelector('.popup_opened');
   const isOverlay = evt.target.classList.contains('popup');
   const isCloseBtn = evt.target.classList.contains('popup__close-button');
-  if (isOverlay || isCloseBtn){
+  if (isOverlay || isCloseBtn) {
+    const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
 };
 
 const handlePopupKeyDownByEsc = (evt) => {
-  const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
 };
@@ -84,45 +85,20 @@ function handleFormSubmitEditProfile(evt) {
 
 formElementTypeEdit.addEventListener('submit', handleFormSubmitEditProfile);
 
-//6cards,like,delete
-const createPhotoElement = (photoData) => {
-  const photoElement = photoTemplate.content.querySelector('.photo__cell').cloneNode(true);
-  const photoImage = photoElement.querySelector('.photo__image');
-  const photoTitle = photoElement.querySelector('.photo__title');
-  const photoDeleteButton = photoElement.querySelector('.photo__delete');
-  const photoLikeButton = photoElement.querySelector('.photo__like');
-
-  photoImage.src = photoData.link;
-  photoImage.alt = photoData.name;
-  photoTitle.textContent = photoData.name;
-
-  photoImage.addEventListener('click', () => {
-    zoomCard(photoData);
-  });
-
-  const handleDelete = () => {
-    photoElement.remove();
-  }
-
-  const handleLike = () => {
-    photoLikeButton.classList.toggle('photo__like_active');
-  }
-
-  photoDeleteButton.addEventListener('click', handleDelete);
-  photoLikeButton.addEventListener('click', handleLike);
-
-  return photoElement;
+//ZoomCard
+const zoomCard = (cardData) => {
+  openPopup(popupTypeZoomImage);
+  zoomImage.src = cardData.link;
+  zoomImage.alt = cardData.name;
+  zoomImageTitle.textContent = cardData.name;
 };
 
-//ZoomCard
-const zoomCard = (photoData) => {
-  openPopup(popupTypeZoomImage);
-  zoomImage.src = photoData.link;
-  zoomImage.alt = photoData.name;
-  zoomImageTitle.textContent = photoData.name;
-}
-
-closePopup(popupTypeZoomImage);
+//generate and add Card
+initialCards.forEach((item) => {
+  const card = new Card(item, 'photo-template');
+  const cardElement = card.generateCard();
+  cardContainer.prepend(cardElement);
+});
 
 //AddPhoto
 const handleAddFormSubmit = (evt) => {
@@ -140,11 +116,6 @@ const handleAddFormSubmit = (evt) => {
 
  closePopup(popupTypeAddCard)
 };
-
-initialCards.forEach((photo) => {
-  const element = createPhotoElement(photo);
-  photoContainer.prepend(element);
-});
 
 formElementTypeAddCard.addEventListener('submit', handleAddFormSubmit);
 

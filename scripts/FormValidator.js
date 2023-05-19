@@ -7,6 +7,30 @@ const validationConfig = {
   errorClass: 'popup__item-error_active'
 };
 
+class FormValidator {
+  constructor(validationArray, formElement) {
+    this._validationArray = validationArray;
+    this._formElement = formElement;
+  }
+
+  showInputError () {
+    const errorElement =  this._formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add(inputErrorClass);
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(errorClass);
+  }
+
+  hideInputError() {
+  const errorElement =  this._formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove(inputErrorClass);
+  errorElement.classList.remove(errorClass);
+  errorElement.textContent = '';
+  }
+}
+
+
+
+
 const showInputError = (formElement, inputElement, errorMessage, { inputErrorClass, errorClass }) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(inputErrorClass);
