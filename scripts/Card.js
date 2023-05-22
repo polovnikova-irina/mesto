@@ -34,7 +34,7 @@ class Card {
   }
 
   _getTemplate() {
-     const cardTemplate = document.getElementById(this._templateSelector);
+    const cardTemplate = document.getElementById(this._templateSelector);
     const cardElement = cardTemplate.content.querySelector('.photo__cell').cloneNode(true);
 
     return cardElement;
