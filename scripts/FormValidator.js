@@ -1,42 +1,62 @@
-/*const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__item',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_inactive',
-  inputErrorClass: 'popup__item_type_error',
-  errorClass: 'popup__item-error_active'
+export const validationConfig = {
+  inputSelector: '.popup__item', //сама строка инпута
+  submitButtonSelector: '.popup__save-button', //кнопка черная
+  inactiveButtonClass: 'popup__save-button_inactive', //кнопка белая
+  inputErrorClass: 'popup__item_type_error', //красн линия
+  errorClass: 'popup__item-error_active' //опасити 1 чтобы текст ошибки отображался
 };
 
-class FormValidator {
-  constructor(obj, formElement) {
-    this._inputSelector = obj.inputSelector;
-    this._submitButtonSelector = obj.submitButtonSelector;
-    this._inactiveButtonClass = obj.inactiveButtonClass;
-    this._inputErrorClass = obj.inputErrorClass;
-    this._errorClass = obj.errorClass;
+export class FormValidator {
+  constructor(config, formElement) {
+    this._inputSelector = config.inputSelector;
+    this._submitButtonSelector = config.submitButtonSelector;
+    this._inactiveButtonClass = config.inactiveButtonClass;
+    this._inputErrorClass = config.inputErrorClass;
+    this._errorClass = config.errorClass;
     this._formElement = formElement;
   }
 
-  _showInputError(errorTextElement, input) {
-    input.classList.add(this._errorClass);
-    errorTextElement.textContent = input.validationMessage;
+  _showInputError() {
+    this._input.classList.add(this.__inputErrorClass);
+    this._errorTextElement.textContent = this._input.validationMessage;
+    this._errorTextElement.classList.add(this._errorClass);
   }
 
   _hideInputError() {
-    input.classList.remove(this._errorClass);
-    errorTextElement.textContent = '';
+    this._input.classList.remove(this.__inputErrorClass);
+    this._errorTextElement.textContent = '';
+    this._errorTextElement.classList.remove(this._errorClass);
   }
 
-  _checkInputValidity(input) {
-   const errorTextElement = this._formElement.querySelector(`${this._inputErrorClass.id}${input.name}`);
-   input.validity.valid ? this._hideInputError(errorTextElement, input) : this._showInputError(errorTextElement, input);
+  _enableButton() {
+    this._button.classList.remove(this._inactiveButtonClass);
+    this._button.removeAttribute('disabled');
+  }
+
+ _disableButton() {
+    this._button.classList.add(this._inactiveButtonClass);
+    this._button.setAttribute('disabled', true);
+  }
+
+  _hasValidInput() {
+    return Array.from(this._inputList).every(input => input.validity.valid);
+  }
+
+  _toggleButtonState() {
+    this._hasValidInput() ? this._enableButton() : this._disableButton()
+  }
+
+  _checkInputValidity() {
+    this._errorTextElement = this._formElement.querySelector(`.${this._input.id}-error`);
+    this._input.validity.valid ? this._hideInputError() : this._showInputError();
   }
 
   _setEventListeners() {
-    this._inputList.forEach(inputElement => {
-    inputElement.addEventListener('input', () => {
-    this._checkInputValidity(input);
-    //this._toggleButtonState();
+    this._inputList.forEach(input => {
+    input.addEventListener('input', () => {
+    this._input = input;
+    this._checkInputValidity();
+    this._toggleButtonState();
       })
     })
   }
@@ -48,12 +68,21 @@ class FormValidator {
   }
 }
 
-const popupEditProfile = new FormValidator(validationConfig, popupTypeEditProfile);
-console.log(popupTypeEditProfile);
-popupTypeEditProfile.enableValidation();
+
+
+
 
 /*
-//обычная
+//изначально
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_inactive',
+  inputErrorClass: 'popup__item_type_error',
+  errorClass: 'popup__item-error_active'
+};
+
 const showInputError = (formElement, inputElement, errorMessage, { inputErrorClass, errorClass }) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(inputErrorClass);

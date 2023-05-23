@@ -43,13 +43,17 @@
         <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popupEditForm" novalidate>
+          <label class="popup__form-element">
           <input id="name-input"  type="text" class="popup__item popup__item_el_title" name="firstname" minlength="2" maxlength="40"  placeholder="Имя"
             required>
             <span class="name-input-error popup__input-error"></span>
+          </label>
+          <label class="popup__form-element">
           <input id="about-input"  type="text" class="popup__item popup__item_el_subtitle" name="information" minlength="2" maxlength="200"
             placeholder="О себе" required>
             <span class="about-input-error popup__input-error"></span>
-          <input class="popup__save-button" type="submit" value="Сохранить">
+          </label>
+          <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
@@ -61,12 +65,16 @@
           aria-label="Закрыть"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="popupEditForm" novalidate>
+        <label class="popup__form-element">
           <input id="photo-name-input" type="text" class="popup__item popup__item_el_photo-name" name="name" placeholder="Название"  minlength="2" maxlength="30" required>
           <span class="photo-name-input-error popup__input-error"></span>
+        </label>
+        <label class="popup__form-element">
           <input id="photo-link-input" type="text" class="popup__item popup__item_el_link" name="link" placeholder="Ссылка на картинку" pattern="https?://.*\.(png|jpg|jpeg|gif)"
             required>
           <span class="photo-link-input-error popup__input-error"></span>
-          <input class="popup__save-button" type="submit" value="Создать" disabled="true">
+        </label>
+          <button class="popup__save-button" type="submit" disabled="true">Создать</button>
         </form>
       </div>
     </div>
@@ -99,9 +107,7 @@
 
   </div>
 
-  <script src="./scripts/Card.js"></script>
-  <script src="./scripts/FormValidator.js"></script>
-  <script src="./scripts/index.js"></script>
+   <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>

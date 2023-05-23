@@ -1,4 +1,7 @@
-//import { Card } from './Card';
+import initialCards from './constants.js';
+import { Card } from './card.js';
+import { validationConfig } from './formValidator.js';
+import { FormValidator } from './formValidator.js';
 
 //popupTypeEditProfile
 const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -55,14 +58,17 @@ const openPopup = (popupType) => {
   document.addEventListener('click', handlePopupClose);
 };
 
-openPopupBtnEdit.addEventListener('click', function(evt) {
+openPopupBtnEdit.addEventListener('click', function() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
+  //formElementEditProfile.disableButton();
   //disableBtn(saveBtnEdit, { inactiveButtonClass: 'popup__save-button_inactive'});
   openPopup(popupTypeEditProfile);
 });
 
-openPopupBtnAdd.addEventListener('click', function(evt) {
+openPopupBtnAdd.addEventListener('click', function() {
+  //formElementAddCard.resetValidation();
+  //formElementAddCard.disableButton();
   //disableBtn(saveBtnAdd, { inactiveButtonClass: 'popup__save-button_inactive'});
   openPopup(popupTypeAddCard);
 });
@@ -86,16 +92,16 @@ function handleFormSubmitEditProfile(evt) {
 formElementTypeEdit.addEventListener('submit', handleFormSubmitEditProfile);
 
 //ZoomCard
-const zoomCard = (cardData) => {
+const openZoomImage = (cardData) => {
   openPopup(popupTypeZoomImage);
   zoomImage.src = cardData.link;
   zoomImage.alt = cardData.name;
   zoomImageTitle.textContent = cardData.name;
 };
 
-//generate and add Card
+//Cardgenerate
 initialCards.forEach((item) => {
-  const card = new Card(item, 'photo-template');
+  const card = new Card(item, 'photo-template', openZoomImage);
   const cardElement = card.generateCard();
   cardContainer.prepend(cardElement);
 });
@@ -119,63 +125,14 @@ const handleAddFormSubmit = (evt) => {
 
 formElementTypeAddCard.addEventListener('submit', handleAddFormSubmit);
 
+//FormValidator
+const formElementEditProfile = new FormValidator(validationConfig, formElementTypeEdit);
+formElementEditProfile.enableValidation();
+
+const formElementAddCard = new FormValidator(validationConfig, formElementTypeAddCard);
+formElementAddCard.enableValidation();
 
 
-
-
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__item',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_inactive',
-  inputErrorClass: 'popup__item_type_error',
-  errorClass: 'popup__item-error_active'
-};
-
-class FormValidator {
-  constructor(obj, formElement) {
-    this._inputSelector = obj.inputSelector;
-    this._submitButtonSelector = obj.submitButtonSelector;
-    this._inactiveButtonClass = obj.inactiveButtonClass;
-    this._inputErrorClass = obj.inputErrorClass;
-    this._errorClass = obj.errorClass;
-    this._formElement = formElement;
-  }
-
-  _showInputError(errorTextElement, input) {
-    input.classList.add(this._errorClass);
-    errorTextElement.textContent = input.validationMessage;
-  }
-
-  _hideInputError(errorTextElement, input) {
-    input.classList.remove(this._errorClass);
-    errorTextElement.textContent = '';
-  }
-
-  _checkInputValidity(input) {
-    const errorTextElement = this._formElement.querySelector(`.${input.id}-error`);
-    input.validity.valid ? this._hideInputError(errorTextElement, input) : this._showInputError(errorTextElement, input);
-  }
-
-  _setEventListeners() {
-    this._inputList.forEach(input => {
-    input.addEventListener('input', () => {
-    this._checkInputValidity(input);
-    //this._toggleButtonState();
-      })
-    })
-  }
-
-  enableValidation() {
-    this._button = this._formElement.querySelector(this._submitButtonSelector);
-    this._inputList = this._formElement.querySelectorAll(this._inputSelector);
-    this._setEventListeners();
-  }
-}
-
-const popupEditProfile = new FormValidator(validationConfig, popupTypeEditProfile);
-console.log(popupTypeEditProfile);
-popupEditProfile.enableValidation();
 
 
 
