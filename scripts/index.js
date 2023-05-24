@@ -28,7 +28,6 @@ const cardContainer = document.querySelector('.photo');
 
 //popupTypeZoomImage
 const popupTypeZoomImage = document.querySelector('.popup_type_zoom-image');
-const photoNameInput = document.querySelector('.popup__item_el_photo-name');
 const zoomImage = document.querySelector('.popup__image_type_zoom-image');
 const zoomImageTitle = document.querySelector('.popup__caption_type_zoom-image');
 
@@ -64,6 +63,7 @@ openPopupBtnEdit.addEventListener('click', function() {
   saveBtnEdit.classList.add('popup__save-button_inactive');
   saveBtnEdit.setAttribute('disabled', true);
   openPopup(popupTypeEditProfile);
+  formElementEditProfile._resetValidation();
 });
 
 //открытие попапа добавить карточки

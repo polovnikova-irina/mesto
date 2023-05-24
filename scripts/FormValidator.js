@@ -61,11 +61,19 @@ export class FormValidator {
     })
   }
 
-  enableValidation() {
+    enableValidation() {
     this._button = this._formElement.querySelector(this._submitButtonSelector);
     this._inputList = this._formElement.querySelectorAll(this._inputSelector);
     this._setEventListeners();
   }
+
+  _resetValidation() {
+    this._inputList.forEach((input) => {
+      this._input = input;
+      this._hideInputError();
+    });
+  }
+
 }
 
 
