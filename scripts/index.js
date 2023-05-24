@@ -33,7 +33,7 @@ const zoomImage = document.querySelector('.popup__image_type_zoom-image');
 const zoomImageTitle = document.querySelector('.popup__caption_type_zoom-image');
 
 
-//function escClosePopup and overlayClosePopup
+//ф-я закрытия попапов нажатием на эск и оверлей
 const handlePopupClose = (evt) => {
   const isOverlay = evt.target.classList.contains('popup');
   const isCloseBtn = evt.target.classList.contains('popup__close-button');
@@ -50,38 +50,38 @@ const handlePopupKeyDownByEsc = (evt) => {
   }
 };
 
-
-//function openPopup
+//общая функция открытия попапов
 const openPopup = (popupType) => {
   popupType.classList.add('popup_opened');
   document.addEventListener('keydown', handlePopupKeyDownByEsc);
   document.addEventListener('click', handlePopupClose);
 };
 
+//открытие попапа редактировать профиль
 openPopupBtnEdit.addEventListener('click', function() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
-  //formElementEditProfile.disableButton();
-  //disableBtn(saveBtnEdit, { inactiveButtonClass: 'popup__save-button_inactive'});
+  saveBtnEdit.classList.add('popup__save-button_inactive');
+  saveBtnEdit.setAttribute('disabled', true);
   openPopup(popupTypeEditProfile);
 });
 
+//открытие попапа добавить карточки
 openPopupBtnAdd.addEventListener('click', function() {
-  //formElementAddCard.resetValidation();
-  //formElementAddCard.disableButton();
-  //disableBtn(saveBtnAdd, { inactiveButtonClass: 'popup__save-button_inactive'});
+  saveBtnAdd.classList.add('popup__save-button_inactive');
+  saveBtnAdd.setAttribute('disabled', true);
   openPopup(popupTypeAddCard);
 });
 
 
-//function сlosePopup
+//общая функция закрытия попапов
 const closePopup = (popupType) => {
   popupType.classList.remove('popup_opened');
   document.removeEventListener('keydown', handlePopupKeyDownByEsc);
   document.removeEventListener('click', handlePopupClose);
 };
 
-//EditProfile
+//ф-я редактирования профиля при заполнении
 function handleFormSubmitEditProfile(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
@@ -91,7 +91,7 @@ function handleFormSubmitEditProfile(evt) {
 
 formElementTypeEdit.addEventListener('submit', handleFormSubmitEditProfile);
 
-//ZoomCard
+//ф-я увеличения фото
 const openZoomImage = (cardData) => {
   openPopup(popupTypeZoomImage);
   zoomImage.src = cardData.link;
@@ -99,14 +99,14 @@ const openZoomImage = (cardData) => {
   zoomImageTitle.textContent = cardData.name;
 };
 
-//Cardgenerate
+//coздание начальных карточек при загрузке страницы
 initialCards.forEach((item) => {
   const card = new Card(item, 'photo-template', openZoomImage);
   const cardElement = card.generateCard();
   cardContainer.prepend(cardElement);
 });
 
-//AddPhoto
+//ф-я создания и добавления новой карточки в контейнер
 const handleAddFormSubmit = (evt) => {
   evt.preventDefault();
 
@@ -115,17 +115,18 @@ const handleAddFormSubmit = (evt) => {
     link: nameLinkInput.value
   };
 
-  const element = createPhotoElement(card);
-  photoContainer.prepend(element);
-
- formElementTypeAddCard.reset();
+  const element = new Card(card, 'photo-template', openZoomImage);
+  cardContainer.prepend(element.generateCard());
+  console.log(element)
+  console.log(cardContainer)
+  formElementTypeAddCard.reset();
 
  closePopup(popupTypeAddCard)
 };
 
 formElementTypeAddCard.addEventListener('submit', handleAddFormSubmit);
 
-//FormValidator
+//Валидация форм
 const formElementEditProfile = new FormValidator(validationConfig, formElementTypeEdit);
 formElementEditProfile.enableValidation();
 

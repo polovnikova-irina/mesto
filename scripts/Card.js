@@ -15,13 +15,13 @@ export class Card {
   }
 
   _handleOpenZoomImage = () => {
-    this._openZoomImage(this._cardData)
+  this._openZoomImage(this._cardData)
   }
 
   _setEventListeners() {
-    this._element.querySelector('.photo__delete').addEventListener('click', this._handleDelete);
-    this._element.querySelector('.photo__like').addEventListener('click', this._handleLike);
-    this._element.querySelector('.photo__image').addEventListener('click', this._handleOpenZoomImage);
+    this._element.querySelector('.photo__delete').addEventListener('click', () => this._handleDelete);
+    this._element.querySelector('.photo__like').addEventListener('click', () => this._handleLike);
+    this._element.querySelector('.photo__image').addEventListener('click', () => this._handleOpenZoomImage);
   }
 
   _getTemplate() {

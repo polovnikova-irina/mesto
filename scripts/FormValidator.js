@@ -39,11 +39,11 @@ export class FormValidator {
   }
 
   _hasValidInput() {
-    return Array.from(this._inputList).every(input => input.validity.valid);
+    return Array.from(this._inputList).some(input => !input.validity.valid);
   }
 
   _toggleButtonState() {
-    this._hasValidInput() ? this._enableButton() : this._disableButton()
+    this._hasValidInput() ? this._disableButton() : this._enableButton();
   }
 
   _checkInputValidity() {
@@ -52,7 +52,7 @@ export class FormValidator {
   }
 
   _setEventListeners() {
-    this._inputList.forEach(input => {
+    this._inputList.forEach((input) => {
     input.addEventListener('input', () => {
     this._input = input;
     this._checkInputValidity();
@@ -67,9 +67,6 @@ export class FormValidator {
     this._setEventListeners();
   }
 }
-
-
-
 
 
 /*
