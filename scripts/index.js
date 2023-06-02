@@ -2,9 +2,11 @@ import initialCards from "./constants.js";
 import { Card } from "./card.js";
 import { validationConfig } from "./formValidator.js";
 import { FormValidator } from "./formValidator.js";
+import Section from "./section.js";
+import Popup from "./popup.js";
 
 //popupTypeEditProfile
-const popupTypeEditProfile = document.querySelector(".popup_type_edit-profile");
+const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
 const openPopupBtnEdit = document.querySelector(".profile__edit-button");
 const formElementTypeEdit = popupTypeEditProfile.querySelector(".popup__form");
 
@@ -21,14 +23,14 @@ const namePhotoInput = document.querySelector(".popup__item_el_photo-name");
 const nameLinkInput = document.querySelector(".popup__item_el_link");
 
 //photoTemplate
-const cardContainer = document.querySelector(".photo");
+const cardContainer = '.photo';
 
 //popupTypeZoomImage
 const popupTypeZoomImage = document.querySelector(".popup_type_zoom-image");
 const zoomImage = document.querySelector(".popup__image_type_zoom-image");
 const zoomImageTitle = document.querySelector(".popup__caption_type_zoom-image");
 
-//ф-я закрытия попапов нажатием на эск и оверлей
+/*//ф-я закрытия попапов нажатием на эск и оверлей
 const handlePopupClose = (evt) => {
   const isOverlay = evt.target.classList.contains("popup");
   const isCloseBtn = evt.target.classList.contains("popup__close-button");
@@ -36,43 +38,43 @@ const handlePopupClose = (evt) => {
     const popupOpened = document.querySelector(".popup_opened");
     closePopup(popupOpened);
   }
-};
+};*/
 
-const handlePopupKeyDownByEsc = (evt) => {
+/*const handlePopupKeyDownByEsc = (evt) => {
   if (evt.key === "Escape") {
     const popupOpened = document.querySelector(".popup_opened");
     closePopup(popupOpened);
   }
-};
+};*/
 
-//общая функция открытия попапов
+/*//общая функция открытия попапов
 const openPopup = (popupType) => {
   popupType.classList.add("popup_opened");
   document.addEventListener("keydown", handlePopupKeyDownByEsc);
   document.addEventListener("click", handlePopupClose);
-};
+};*/
 
-//открытие попапа редактировать профиль
+/*//открытие попапа редактировать профиль
 openPopupBtnEdit.addEventListener("click", function () {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
   formElementEditProfile.disableSubmitButton();
   openPopup(popupTypeEditProfile);
   formElementEditProfile.resetValidation();
-});
+});*/
 
-//открытие попапа добавить карточки
+/*//открытие попапа добавить карточки
 openPopupBtnAdd.addEventListener("click", function () {
   formElementAddCard.disableSubmitButton();
   openPopup(popupTypeAddCard);
-});
+});*/
 
-//общая функция закрытия попапов
+/*//общая функция закрытия попапов
 const closePopup = (popupType) => {
   popupType.classList.remove("popup_opened");
   document.removeEventListener("keydown", handlePopupKeyDownByEsc);
   document.removeEventListener("click", handlePopupClose);
-};
+};*/
 
 //ф-я редактирования профиля при заполнении
 function handleFormSubmitEditProfile(evt) {
@@ -92,22 +94,22 @@ const openZoomImage = (cardData) => {
   zoomImageTitle.textContent = cardData.name;
 };
 
-//функция возвращения новой карточки
-function createCard(cardData) {
+/*//общая функция возвращения новой карточки
+  function createCard(cardData) {
   const card = new Card(cardData, "photo-template", openZoomImage);
   const cardElement = card.generateCard();
   return cardElement;
-}
+}*/
 
-//ф-я добавления карточки в контейнер
+//общая ф-я добавления карточки в контейнер
 function addCard(container, card) {
   container.prepend(card);
 }
 
-//coздание начальных карточек при загрузке страницы
+/*//coздание начальных карточек при загрузке страницы
 initialCards.forEach((item) => {
   addCard(cardContainer,createCard(item));
-});
+});*/
 
 //ф-я создания и добавления новой карточки в контейнер
 const handleAddFormSubmit = (evt) => {
@@ -139,4 +141,30 @@ const formElementAddCard = new FormValidator(
   formElementTypeAddCard
 );
 formElementAddCard.enableValidation();
+
+//создание и добавл карточки инишиалкард в контейнер
+const initialCardList = new Section({
+  items: initialCards,
+  renderer: (cardData) => {
+    const card = new Card(cardData, "photo-template", openZoomImage);
+    const cardElement = card.generateCard();
+    initialCardList.addItem(cardElement);
+  }
+  },
+    cardContainer
+)
+
+initialCardList.renderItem();
+
+/*//открытие закрытие попапов
+const openPopupBtnEdit = new Popup(popupTypeEditProfile);
+
+
+const openPopupBtnAdd*/
+
+const popup = new Popup(popupTypeEditProfile);
+openPopupBtnEdit.addEventListener('click', () => {
+  popup.openPopup();
+});
+
 
