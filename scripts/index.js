@@ -161,8 +161,7 @@ const openPopupBtnEdit = new Popup(popupTypeEditProfile);
 
 
 const openPopupBtnAdd*/
-
-const popup = new Popup(popupTypeEditProfile);
+const popup = new Popup('.popup_type_edit-profile');
 openPopupBtnEdit.addEventListener('click', () => {
   popup.openPopup();
 });
