@@ -1,8 +1,8 @@
 export class Card {
-  constructor(cardData, templateSelector, openZoomImage) {
+  constructor(cardData, templateSelector, handleCardClick) {
     this._cardData = cardData;
     this._templateSelector = templateSelector;
-    this._openZoomImage = openZoomImage;
+    this._handleCardClick= handleCardClick;
   }
 
   _handleDelete = () => {
@@ -17,7 +17,7 @@ export class Card {
   };
 
   _handleOpenZoomImage = () => {
-    this._openZoomImage(this._cardData);
+    this._handleCardClick.open(this._cardData);
   };
 
   _setEventListeners() {
