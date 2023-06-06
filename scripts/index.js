@@ -6,6 +6,7 @@ import Section from "./section.js";
 import Popup from "./popup.js";
 import PopupWithImage from "./popupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./userInfo.js";
 
 //popupTypeEditProfile
 const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -78,7 +79,7 @@ const closePopup = (popupType) => {
   document.removeEventListener("click", handlePopupClose);
 };*/
 
-//ф-я редактирования профиля при заполнении
+/*//ф-я редактирования профиля при заполнении
 function handleFormSubmitEditProfile(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
@@ -86,7 +87,7 @@ function handleFormSubmitEditProfile(evt) {
   closePopup(popupTypeEditProfile);
 }
 
-formElementTypeEdit.addEventListener("submit", handleFormSubmitEditProfile);
+formElementTypeEdit.addEventListener("submit", handleFormSubmitEditProfile);*/
 
 /*//ф-я увеличения фото
 const openZoomImage = (cardData) => {
@@ -160,10 +161,25 @@ const initialCardList = new Section({
 
 initialCardList.renderItem();
 
+//изменение данных профиля
+const userInfo = new UserInfo(".profile__title", ".profile__subtitle");
+//редактирование профиль
+const popupProfile = new PopupWithForm({
+  handleFormSubmit: (formData) => {
+    userInfo.setUserInfo(formData);
+    popupProfile.close();
+  }
+},
+  '.popup_type_edit-profile'
+)
+
+popupProfile.setEventListeners();
 
 //открыть попап редакт профиля
 const openPopupEditProfile = new Popup('.popup_type_edit-profile');
 openPopupBtnEdit.addEventListener('click', () => {
+  const currentUserInfo = userInfo.getUserInfo();
+  userInfo.setUserInfo(currentUserInfo);
   openPopupEditProfile.open();
 });
 openPopupEditProfile.setEventListeners();
@@ -175,12 +191,16 @@ openPopupBtnAdd.addEventListener('click', () => {
 });
 openPopupAddCard.setEventListeners();
 
-/*//редактирование инпутов
-const handleFormSubmitEditProfile = PopupWithForm({
-  handleFormSubmit: (formData) => {
 
+
+
+//добавл карт
+const popupProfile = new PopupWithForm({
+  handleFormSubmit: (formData) => {
+    popupProfile.close();
   }
 },
   '.popup_type_edit-profile'
-)*/
+)
 
+popupProfile.setEventListeners();
