@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -25,4 +25,10 @@ const initialCards = [
   }
 ];
 
-export default initialCards;
+/*export const validationConfig = {
+  inputSelector: ".popup__item", //сама строка инпута
+  submitButtonSelector: ".popup__save-button", //кнопка черная
+  inactiveButtonClass: "popup__save-button_inactive", //кнопка белая
+  inputErrorClass: "popup__item_type_error", //красн линия
+  errorClass: "popup__item-error_active", //опасити 1 чтобы текст ошибки отображался
+};*/
