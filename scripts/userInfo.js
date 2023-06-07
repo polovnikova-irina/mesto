@@ -4,13 +4,11 @@ export default class UserInfo {
     this._profileJob = document.querySelector(jobSelector);
    }
 
-  getUserInfo() {
-    //возвращает объект с данными пользователя.
-    //Этот метод пригодится когда данные пользователя нужно будет
-    //подставить в форму при открытии.
-    /*this._nameInput.value = this._profileTitle.textContent;
-    this._jobInput.value = this._profileSubtitle.textContent;*/
-    return {name: this._profileName.textContent, job: this._profileJob.textContent };
+   getUserInfo() {
+    return {
+      name: this._profileName.textContent,
+      job: this._profileJob.textContent
+    };
   }
 
   setUserInfo(formData) {
