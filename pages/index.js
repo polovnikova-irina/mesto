@@ -1,25 +1,19 @@
-import initialCards from "../utils/constants.js";
-import { Card } from "../components/Card.js";
-import { validationConfig } from "../components/FormValidator.js/index.js";
-import { FormValidator } from "../components/FormValidator.js/index.js";
-import Section from "../components/Section.js";
-import Popup from "../components/Popup.js";
-import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithForm from "../components/PopupWithForm.js";
-import UserInfo from "../components/UserInfo.js";
-
-//popupTypeEditProfile
-const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
-const openPopupBtnEdit = document.querySelector(".profile__edit-button");
-const formElementTypeEdit = popupTypeEditProfile.querySelector(".popup__form");
-
-//popupTypeAddCard
-const popupTypeAddCard = document.querySelector(".popup_type_add-card");
-const openPopupBtnAdd = document.querySelector(".profile__add-button");
-const formElementTypeAddCard = popupTypeAddCard.querySelector(".popup__form");
-
-//photoTemplate
-const cardContainer = '.photo';
+import {
+  initialCards,
+  validationConfig,
+  openPopupBtnEdit,
+  formElementTypeEdit,
+  openPopupBtnAdd,
+  formElementTypeAddCard,
+  cardContainer,
+} from "../scripts/utils/constants.js";
+import Card from "../scripts/components/Card.js";
+import FormValidator from "../scripts/components/FormValidator.js";
+import Section from "../scripts/components/Section.js";
+import Popup from "../scripts/components/Popup.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import UserInfo from "../scripts/components/UserInfo.js";
 
 //Валидация формы редактирования
 const formElementEditProfile = new FormValidator(
@@ -28,7 +22,6 @@ const formElementEditProfile = new FormValidator(
 );
 formElementEditProfile.enableValidation();
 
-
 //Валидация формы добавления карточек
 const formElementAddCard = new FormValidator(
   validationConfig,
@@ -36,6 +29,7 @@ const formElementAddCard = new FormValidator(
 );
 formElementAddCard.enableValidation();
 
+//userInfo
 const userInfo = new UserInfo(".profile__title", ".profile__subtitle");
 
 //Принятие новых данных пользователя и добавление их на страницу

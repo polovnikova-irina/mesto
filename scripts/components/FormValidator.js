@@ -1,12 +1,4 @@
-export const validationConfig = {
-  inputSelector: ".popup__item", //сама строка инпута
-  submitButtonSelector: ".popup__save-button", //кнопка черная
-  inactiveButtonClass: "popup__save-button_inactive", //кнопка белая
-  inputErrorClass: "popup__item_type_error", //красн линия
-  errorClass: "popup__item-error_active", //опасити 1 чтобы текст ошибки отображался
-};
-
-export class FormValidator {
+export default class FormValidator {
   constructor(config, formElement) {
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
