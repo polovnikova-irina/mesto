@@ -66,29 +66,33 @@ openPopupBtnAdd.addEventListener('click', () => {
 });
 openPopupAddCard.setEventListeners();
 
+//создание и добавление карточки
+const renderCard = (data) => {
+  const card = new Card(data, "photo-template", popupWithImage);
+    const cardElement = card.generateCard();
+    section.addItem(cardElement);
+}
+
 //Добавление начальных карточек
 const section = new Section({
   items: initialCards,
   renderer: (cardData) => {
-    const card = new Card(cardData, "photo-template", popupWithImage);
-    const cardElement = card.generateCard();
-    section.addItem(cardElement);
-    popupWithImage.setEventListeners();
+    renderCard(cardData)
   }
 }, cardContainer);
+
+popupWithImage.setEventListeners();
 
 section.renderItem();
 
 // Создание и добавление новых карточек при заполнении полей поп-апа
-const PopupAddCard = new PopupWithForm({
+const popupAddCard = new PopupWithForm({
   handleFormSubmit: (formData) => {
-    const card = new Card(formData, "photo-template", popupWithImage);
-    const cardElement = card.generateCard();
-    section.addItem(cardElement);
-    PopupAddCard.close();
+    renderCard(formData)
+    popupAddCard.close();
   }
 }, '.popup_type_add-card');
 
-PopupAddCard.setEventListeners();
+popupAddCard.setEventListeners();
 
 
