@@ -51,7 +51,8 @@ const openPopupEditProfile = new Popup('.popup_type_edit-profile');
 openPopupBtnEdit.addEventListener('click', () => {
   const currentUserInfo = userInfo.getUserInfo();
   openPopupEditProfile.openWithValues(currentUserInfo);
-  formElementEditProfile.disableSubmitButton()
+  formElementEditProfile.disableSubmitButton();
+  formElementEditProfile.resetValidation();
 });
 openPopupEditProfile.setEventListeners();
 
@@ -62,7 +63,8 @@ const popupWithImage = new PopupWithImage('.popup_type_zoom-image');
 const openPopupAddCard = new Popup('.popup_type_add-card');
 openPopupBtnAdd.addEventListener('click', () => {
   openPopupAddCard.open();
-  formElementAddCard.disableSubmitButton()
+  formElementAddCard.disableSubmitButton();
+  formElementAddCard.resetValidation();
 });
 openPopupAddCard.setEventListeners();
 
