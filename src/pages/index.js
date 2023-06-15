@@ -68,9 +68,9 @@ openPopupBtnAdd.addEventListener('click', () => {
 });
 openPopupAddCard.setEventListeners();
 
-//создание и добавление карточки
+//создание и добавление, открытие карточки
 const renderCard = (data) => {
-  const card = new Card(data, "photo-template", popupWithImage);
+  const card = new Card(data, "photo-template", (data) => popupWithImage.open(data));
     const cardElement = card.generateCard();
     section.addItem(cardElement);
 }

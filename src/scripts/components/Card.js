@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(cardData, templateSelector, handleCardClick) {
+  constructor(cardData, templateSelector, handleCardClick ) {
     this._cardData = cardData;
     this._templateSelector = templateSelector;
     this._handleCardClick= handleCardClick;
@@ -8,28 +8,23 @@ export default class Card {
   _handleDelete = () => {
     this._element.remove();
     this._element = null;
+    this._photoImageElement = null;
+    this._photoLike = null;
+    this._photoDelete = null;
   };
 
   _handleLike = () => {
-    this._element
-      .querySelector(".photo__like")
-      .classList.toggle("photo__like_active");
+    this._photoLike.classList.toggle("photo__like_active");
   };
 
   _handleOpenZoomImage = () => {
-    this._handleCardClick.open(this._cardData);
+    this._handleCardClick(this._cardData);
   };
 
   _setEventListeners() {
-    this._element
-      .querySelector(".photo__delete")
-      .addEventListener("click", this._handleDelete);
-    this._element
-      .querySelector(".photo__like")
-      .addEventListener("click", this._handleLike);
-    this._element
-      .querySelector(".photo__image")
-      .addEventListener("click", this._handleOpenZoomImage);
+    this._photoDelete.addEventListener("click", this._handleDelete);
+    this._photoLike.addEventListener("click", this._handleLike);
+    this._photoImageElement.addEventListener("click", this._handleOpenZoomImage);
   }
 
   _getTemplate() {
@@ -45,6 +40,8 @@ export default class Card {
     this._element = this._getTemplate();
 
     this._photoImageElement = this._element.querySelector(".photo__image");
+    this._photoLike = this._element.querySelector(".photo__like");
+    this._photoDelete = this._element.querySelector(".photo__delete");
 
     this._photoImageElement.src = this._cardData.link;
     this._photoImageElement.alt = this._cardData.name;
