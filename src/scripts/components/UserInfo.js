@@ -4,7 +4,9 @@ export default class UserInfo {
     this._profileJob = document.querySelector(jobSelector);
    }
 
+
    getUserInfo() {
+    //возвращает объект с данными пользователя
     return {
       name: this._profileName.textContent,
       job: this._profileJob.textContent
