@@ -6,17 +6,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
+  <link rel="stylesheet" href="pages/index.css">
 </head>
 
 <body class="body">
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип">
+      <img class="header__logo" src="images/logo.svg" src="<%=require('./images/logo.svg')%>" alt="Логотип">
     </header>
 
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Аватар">
+        <div class="profile__edit">
+          <img class="profile__avatar" src="images/profile-avatar.jpg" src="<%=require('./images/profile-avatar.jpg')%>" alt="Аватар">
+            <div class="profile__overlay">
+              <button class="profile__avatar-btn"  type="button"aria-label="Редактировать"></button>
+            </div>
+        </div>
         <div class="profile__info-wrapper">
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -78,9 +84,31 @@
       </div>
     </div>
 
+    <div class="popup popup_type_confirm">
+      <div class="popup__container popup__container_type_frame">
+        <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+        <h2 class="popup__title popup__title_type_confirm">Вы уверены?</h2>
+          <button class="popup__save-button" type="submit" disabled="true">Да</button>
+      </div>
+    </div>
+
+    <div class="popup popup_type_avatar">
+      <div class="popup__container popup__container_type_frame">
+        <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" name="popupAvatarForm" novalidate>
+          <label class="popup__form-element">
+            <input id="photo-link-input" type="text" class="popup__item popup__item_el_link" name="link"
+              placeholder="Ссылка на картинку" pattern="https?://.*\.(png|jpg|jpeg|gif)" required>
+            <span class="photo-link-input-error popup__input-error"></span>
+          </label>
+          <button class="popup__save-button" type="submit" disabled="true">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
 
     <div class="popup popup_type_zoom-image">
-
       <div class="popup__container popup__container_type_zoom-image">
         <button class="popup__close-button popup__close-button_type_zoom-image" type="button"
           aria-label="Закрыть"></button>
@@ -98,7 +126,10 @@
           alt="Архыз" />
         <div class="photo__caption">
           <h2 class="photo__title"></h2>
-          <button class="photo__like" type="button"></button>
+          <div class="photo__like-container">
+            <button class="photo__like" type="button"></button>
+            <span class="photo__like-count">1</span>
+          </div>
           <button class="photo__delete" type="button"></button>
         </div>
       </li>
@@ -106,6 +137,7 @@
 
   </div>
 
+  <script type="module" src="./pages/index.js"></script>
 </body>
 
 </html>

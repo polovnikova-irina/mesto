@@ -32,4 +32,4 @@
 * Добавить коммментарии;
 * Добавить счетчик количества лайков
 
-### [Ссылка на сайт](https://polovnikova-irina.github.io/mesto/index.html)
+### [Ссылка на сайт](https://polovnikova-irina.github.io/mesto)

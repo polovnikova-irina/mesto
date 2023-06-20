@@ -1,4 +1,4 @@
-import "./index.css";
+//import "./index.css";
 
 import {
   initialCards,
@@ -106,3 +106,54 @@ const popupAddCard = new PopupWithForm(
 );
 
 popupAddCard.setEventListeners();
+
+
+//СПРИНТ 9
+
+//Загрузка карточек с сервера
+fetch('https://mesto.nomoreparties.co/v1/cohort-69/cards', {
+  headers: {
+    authorization: '9ec885fb-bc6f-4c8c-9e39-a212b12d1d1a'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  });
+
+// Загрузка информации о пользователе с сервера
+  fetch('https://mesto.nomoreparties.co/v1/cohort-69/users/me ', {
+  headers: {
+    authorization: '9ec885fb-bc6f-4c8c-9e39-a212b12d1d1a'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  });
+
+  //Редактирование профиля
+ fetch('https://mesto.nomoreparties.co/v1/cohort-69/users/me', {
+  method: 'PATCH',
+  headers: {
+    authorization: '9ec885fb-bc6f-4c8c-9e39-a212b12d1d1a',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'Новое имя пользователя',
+    about: 'Новое описание пользователя'
+  })
+});
+
+//Добавление новой карточки
+
+//открытие попапа на корзину
+const deleteButton = document.querySelector('.photo__delete');
+const popup = document.querySelector('.popup_type_avatar');
+const openPopup = (popupType) => {
+  popupType.classList.add("popup_opened");
+}
+
+deleteButton.addEventListener('click', () => {
+  openPopup(popup);
+});
