@@ -40,6 +40,12 @@ export const validationConfig = {
   errorClass: "popup__item-error_active", //опасити 1 чтобы текст ошибки отображался
 };
 
+export const infoConfig = {
+  nameSelector: ".profile__title",
+  jobSelector: ".profile__subtitle",
+  avatar: "profile__avatar"
+};
+
 //popupTypeEditProfile
 const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
 export const openPopupBtnEdit = document.querySelector(".profile__edit-button");

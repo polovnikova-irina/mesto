@@ -3,6 +3,7 @@
 import {
   initialCards,
   validationConfig,
+  infoConfig,
   openPopupBtnEdit,
   formElementTypeEdit,
   openPopupBtnAdd,
@@ -16,6 +17,7 @@ import Popup from "../scripts/components/Popup.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
+import Api from "../scripts/components/Api.js";
 
 //Валидация формы редактирования
 const formElementEditProfile = new FormValidator(
@@ -32,7 +34,7 @@ const formElementAddCard = new FormValidator(
 formElementAddCard.enableValidation();
 
 //userInfo
-const userInfo = new UserInfo(".profile__title", ".profile__subtitle");
+const userInfo = new UserInfo(infoConfig);
 
 //Принятие новых данных пользователя и добавление их на страницу
 const popupProfile = new PopupWithForm(
@@ -110,42 +112,20 @@ popupAddCard.setEventListeners();
 
 //СПРИНТ 9
 
-//Загрузка карточек с сервера
-fetch('https://mesto.nomoreparties.co/v1/cohort-69/cards', {
-  headers: {
-    authorization: '9ec885fb-bc6f-4c8c-9e39-a212b12d1d1a'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  });
-
-// Загрузка информации о пользователе с сервера
-  fetch('https://mesto.nomoreparties.co/v1/cohort-69/users/me ', {
-  headers: {
-    authorization: '9ec885fb-bc6f-4c8c-9e39-a212b12d1d1a'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  });
-
-  //Редактирование профиля
- fetch('https://mesto.nomoreparties.co/v1/cohort-69/users/me', {
-  method: 'PATCH',
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-69',
   headers: {
     authorization: '9ec885fb-bc6f-4c8c-9e39-a212b12d1d1a',
     'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: 'Новое имя пользователя',
-    about: 'Новое описание пользователя'
-  })
+  }
 });
 
-//Добавление новой карточки
+//выполнение Загрузка информации о пользователе с сервера и Добавление карточки
+Promise.all([api.getInfo(), api.getInitialCards()])
+.then(([dataUser, dataCard]) => {
+  console.log(dataUser);
+  console.log(dataCard);
+})
 
 //открытие попапа на корзину
 const deleteButton = document.querySelector('.photo__delete');

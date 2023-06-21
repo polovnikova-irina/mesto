@@ -1,7 +1,8 @@
 export default class UserInfo {
-  constructor(nameSelector, jobSelector) {
-    this._profileName = document.querySelector(nameSelector);
-    this._profileJob = document.querySelector(jobSelector);
+  constructor(infoConfig) {
+    this._profileName = document.querySelector(infoConfig.nameSelector);
+    this._profileJob = document.querySelector(infoConfig.jobSelector);
+    this._profileAvatar = document.querySelector(infoConfig.avatar);
    }
 
 
@@ -15,6 +16,7 @@ export default class UserInfo {
 
   setUserInfo(formData) {
     // принимает новые данные пользователя и добавляет их на страницу.
+    this._profileAvatar.textContent = formData.avatar;
     this._profileName.textContent = formData.name;
     this._profileJob.textContent = formData.job;
   }
