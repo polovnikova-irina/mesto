@@ -2,7 +2,7 @@ export default class UserInfo {
   constructor(infoConfig) {
     this._profileName = document.querySelector(infoConfig.nameSelector);
     this._profileJob = document.querySelector(infoConfig.jobSelector);
-    this._profileAvatar = document.querySelector(infoConfig.avatar);
+    this._profileAvatar = document.querySelector(infoConfig.avatarSelector);
    }
 
 
@@ -10,14 +10,25 @@ export default class UserInfo {
     //возвращает объект с данными пользователя
     return {
       name: this._profileName.textContent,
-      job: this._profileJob.textContent
+      job: this._profileJob.textContent,
     };
   }
 
-  setUserInfo(formData) {
+  getAvatarInfo() {
+    //возвращает объект с данными пользователя
+    return {
+      avatar: this._profileAvatar.src
+    };
+  }
+
+  setAvatar(avatarUrl) {
+    this._profileAvatar.src = avatarUrl;
+  }
+
+  setUserInfo({name, job, avatar}) {
     // принимает новые данные пользователя и добавляет их на страницу.
-    this._profileAvatar.textContent = formData.avatar;
-    this._profileName.textContent = formData.name;
-    this._profileJob.textContent = formData.job;
+    this._profileName.textContent = name;
+    this._profileJob.textContent = job;
+    this._profileAvatar.src = avatar;
   }
 }

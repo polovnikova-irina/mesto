@@ -1,11 +1,22 @@
 export default class Card {
-  constructor(cardData, templateSelector, handleCardClick ) {
+  constructor(cardData, templateSelector, handleCardClick /*handleLikeClick, handleDeleteClick*/ ) {
+    console.log(cardData)
     this._cardData = cardData;
+    this._myId = cardData.myId;
+    this._ownerId = cardData.owner._id;
     this._templateSelector = templateSelector;
-    this._handleCardClick= handleCardClick;
+    this._handleCardClick = handleCardClick;
   }
 
-  _handleDelete = () => {
+  getId() {
+    return this._myId
+  }
+
+  _changeVisibleTrash() {
+    this._myId !== this._ownerId ?  this._photoDelete.style.display = 'none' : this._photoDelete.style.display = 'block';
+  }
+
+  handleDelete = () => {
     this._element.remove();
     this._element = null;
     this._photoImageElement = null;
@@ -22,7 +33,7 @@ export default class Card {
   };
 
   _setEventListeners() {
-    this._photoDelete.addEventListener("click", this._handleDelete);
+    this._photoDelete.addEventListener("click", this.handleDelete);
     this._photoLike.addEventListener("click", this._handleLike);
     this._photoImageElement.addEventListener("click", this._handleOpenZoomImage);
   }
@@ -46,6 +57,8 @@ export default class Card {
     this._photoImageElement.src = this._cardData.link;
     this._photoImageElement.alt = this._cardData.name;
     this._element.querySelector(".photo__title").textContent = this._cardData.name;
+
+    this._changeVisibleTrash()
 
     this._setEventListeners();
 
