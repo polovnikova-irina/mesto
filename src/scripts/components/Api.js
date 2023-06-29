@@ -71,17 +71,35 @@ addAvatar(data) {
   .then(this._checkResponce)
 }
 
-deleteCard(_id) {
-  return fetch(`${this._url}/users/cards/${_id}`, {
+deleteCard(cardId) {
+  return fetch(`${this._url}/cards/${cardId}`, {
     method: 'DELETE',
     headers: {
       authorization: this._authorization,
-      'Content-Type': 'application/json'
     },
 })
   .then(this._checkResponce)
 }
 
+addLike(cardId) {
+  return fetch(`${this._url}/cards/${cardId}/likes`, {
+    method: 'PUT',
+    headers: {
+      authorization: this._authorization,
+    },
+})
+  .then(this._checkResponce)
+}
+
+deleteLike(cardId) {
+  return fetch(`${this._url}/cards/${cardId}/likes`, {
+    method: 'DELETE',
+    headers: {
+      authorization: this._authorization,
+    },
+})
+  .then(this._checkResponce)
+}
 
 }
 

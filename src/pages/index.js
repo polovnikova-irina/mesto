@@ -1,4 +1,4 @@
-//import "./index.css";
+import "./index.css";
 
 import {
   validationConfig,
@@ -19,6 +19,16 @@ import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import Api from "../scripts/components/Api.js";
+import PopupDeleteCard from "../scripts/components/PopupDeleteCard.js";
+
+//класс Api
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-69',
+  headers: {
+    authorization: '9ec885fb-bc6f-4c8c-9e39-a212b12d1d1a',
+    'Content-Type': 'application/json'
+  }
+});
 
 //Валидация формы редактирования профиля
 const formElementEditProfile = new FormValidator(
@@ -48,19 +58,24 @@ const userInfo = new UserInfo(infoConfig);
 //Принятие новых данных пользователя и добавление их на страницу
 const popupProfile = new PopupWithForm({
   handleFormSubmit: (userData) => {
+    popupProfile.renderLoading(true);
     api.sentUsersData(userData)
       .then(res => {
         userInfo.setUserInfo({name: res.name, job: res.about, avatar: res.avatar});
+        popupProfile.close();
       })
       .catch(err => {
         console.log('Ошибка:', err);
-      });
+      })
+      .finally(() => {
+        popupAddCard.renderLoading(false);
+      })
   }
 }, ".popup_type_edit-profile");
 
 popupProfile.setEventListeners();
 
-//Класс попап для реадктирования профиля
+//Класс попап для реадактирования профиля
 const profileForm = new Popup(".popup_type_edit-profile");
 
 //Открытие попапа редактирования профиля и редактирование
@@ -85,16 +100,30 @@ openPopupBtnAdd.addEventListener("click", () => {
 });
 popupCard.setEventListeners();
 
-//создание и добавление, открытие карточки
-const renderCard = (data) => {
-  const card = new Card(data, "photo-template", (data) =>
-    popupWithImage.open(data)
-  );
-  const cardElement = card.generateCard();
-  section.addItem(cardElement);
-};
+// Создание и добавление новых карточек при заполнении полей поп-апа
+const popupAddCard = new PopupWithForm(
+  {
+    handleFormSubmit: (cardData,) => {
+      popupAddCard.renderLoading(true);
+        api.createCard(cardData)
+          .then(res => {
+            res.myId = res.owner._id;
+            renderCard(res);
+            popupAddCard.close();
+          })
+          .catch(err => {
+            console.log('Ошибка:', err);
+          })
+          .finally(() => {
+            popupAddCard.renderLoading(false);
+          })
+    },
+  },
+  ".popup_type_add-card"
+);
+popupAddCard.setEventListeners();
 
-//Добавление начальных карточек
+//класс Section
 const section = new Section(
   {
     renderer: (cardData) => {
@@ -106,22 +135,62 @@ const section = new Section(
 
 popupWithImage.setEventListeners();
 
-// Создание и добавление новых карточек при заполнении полей поп-апа
-const popupAddCard = new PopupWithForm(
-  {
-    handleFormSubmit: (cardData) => {
-      api.createCard(cardData)
-      .then(res => {
-        renderCard(res);
-      })
-      .catch(err => {
-        console.log('Ошибка:', err);
-      });
-    },
-  },
-  ".popup_type_add-card"
-);
-popupAddCard.setEventListeners();
+//Попап удаления карточки
+const popupDeleteCard = new PopupDeleteCard(".popup_type_confirm", (cardElement, cardId) => {
+  popupDeleteCard.renderLoading(true);
+  api.deleteCard(cardId)
+    .then((res) => {
+      console.log('карточка удалена с сервера', res)
+      cardElement.deleteCardElement()
+      popupDeleteCard.close()
+    })
+    .catch((err) => {
+      console.log('Ошибка при удалении карточки:', err);
+    })
+    .finally(() => {
+      popupDeleteCard.renderLoading(false);
+    })
+});
+popupDeleteCard.setEventListeners();
+
+//создание и добавление, открытие карточки, удаление карточки, лайк
+const renderCard = (data) => {
+  const card = new Card(
+    data,
+    "photo-template",
+    {
+      handleCardClick: (data) => popupWithImage.open(data),
+
+      handleDeleteClick: (cardElement, cardId) => {
+        console.log('handleDeleteClickcardData:', cardElement, cardId);
+        popupDeleteCard.open(cardElement, cardId);
+      },
+
+      handleLikeClick: (isLiked, cardId) => {
+        if (isLiked) {
+          api.deleteLike(cardId)
+            .then(res => {
+              card.toggleLikes(res.likes);
+            })
+            .catch(err =>{
+              console.log('Ошибка при удалении лайка:', err);
+            })
+        } else {
+          api.addLike(cardId)
+            .then(res => {
+              card.toggleLikes(res.likes);
+            })
+            .catch(err => {
+              console.log('Ошибка при добавлении лайка:', err);
+            })
+            .finally()
+        }
+      }
+    }
+  );
+  const cardElement = card.generateCard();
+  section.addItem(cardElement);
+};
 
 
 //Открытие попапа автара
@@ -138,52 +207,35 @@ popupAvatar.setEventListeners();
 const popupAddAvatar = new PopupWithForm(
   {
     handleFormSubmit: (avatarData) => {
+      popupAddAvatar.renderLoading(true);
       api.addAvatar(avatarData)
       .then(res => {
-        console.log(res)
         userInfo.getAvatarInfo(res.avatar);
         userInfo.setAvatar(res.avatar);
+        popupAddAvatar.close();
       })
       .catch(err => {
-        console.log('Ошибка:', err);
-      });
+        console.log('Ошибка при обновлении аватара:', err);
+      })
+      .finally(() => {
+        popupAddAvatar.renderLoading(false);
+      })
     },
   },
   ".popup_type_avatar"
 );
 popupAddAvatar.setEventListeners();
 
-
-//СПРИНТ 9
-
-//класс Api
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-69',
-  headers: {
-    authorization: '9ec885fb-bc6f-4c8c-9e39-a212b12d1d1a',
-    'Content-Type': 'application/json'
-  }
-});
-
 //выполнение Загрузка информации о пользователе с сервера и Добавление карточки с сервера
 Promise.all([api.getInfo(), api.getCards()])
 .then(([dataUser, dataCard]) => {
   dataCard.forEach(item => item.myId = dataUser._id);
-  section.renderItem(dataCard);
+  section.renderItem(dataCard.reverse());
   userInfo.setUserInfo({name: dataUser.name, job: dataUser.about, avatar: dataUser.avatar});
 })
 .catch((err) => {
-  console.log('Ошибка:', err);
-});
+  console.log('Ошибка при загрузке данных о пользователе:', err);
+})
+.finally();
 
-/*//открытие попапа на корзину
-const deleteButton = document.querySelector('.photo__delete');
-const popup = document.querySelector('.popup_type_avatar');
-const openPopup = (popupType) => {
-  popupType.classList.add("popup_opened");
-}
-
-deleteButton.addEventListener('click', () => {
-  openPopup(popup);
-});*/
 
