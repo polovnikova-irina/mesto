@@ -5,7 +5,6 @@ export default class Card {
     this._cardId = cardData._id;
     this._ownerId = cardData.owner._id;
     this._likes = cardData.likes;
-    this._isLiked = false;
     this._likesLength = cardData.likes.length;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
@@ -14,11 +13,7 @@ export default class Card {
   }
 
   _handleDeleteCard = () => {
-    this._handleDeleteClick(this, this._cardId);
-  };
-
-  _handleLikeCard  = () => {
-    this._handleLikeClick(this._isLiked, this._cardId);
+    this._handleDeleteClick(this, this._cardId, this._counter);
   };
 
   deleteCardElement() {
@@ -37,19 +32,23 @@ export default class Card {
   }
 
   _checkLike() {
-    this._likes.forEach(element => {
-      if (element._id === this._myId) {
+    this._likes.forEach(item  => {
+      if (item._id === this._myId) {
         this._photoLike.classList.add("photo__like_active");
-        this.isLiked = true
         return;
       }
     });
     this._counter.textContent = this._likesLength;
   }
 
+  isLikeByMyId() {
+    return this._likes.find(item => item._id === this._myId)
+  }
+
   toggleLikes(likes) {
-    this._photoLike.classList.toggle("photo__like_active");
+    this._likes = likes;
     this._counter.textContent = likes.length;
+    this._photoLike.classList.toggle("photo__like_active");
   }
 
   _handleOpenZoomImage = () => {
@@ -67,7 +66,7 @@ export default class Card {
 
   _setEventListeners() {
     this._photoDelete.addEventListener("click", this._handleDeleteCard);
-    this._photoLike.addEventListener("click", this._handleLikeCard);
+    this._photoLike.addEventListener("click", this._handleLikeClick);
     this._photoImageElement.addEventListener("click", this._handleOpenZoomImage);
   }
 
@@ -86,7 +85,6 @@ export default class Card {
     this._changeVisibleTrash();
     this._checkLike();
     this._setEventListeners();
-
 
     return this._element;
   }

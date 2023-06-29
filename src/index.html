@@ -20,7 +20,7 @@
         <div class="profile__edit">
           <img class="profile__avatar" src="#" alt="Аватар">
             <div class="profile__overlay">
-              <button class="profile__avatar-btn"  type="button"aria-label="Редактировать"></button>
+              <button class="profile__avatar-btn" type="button"aria-label="Редактировать"></button>
             </div>
         </div>
         <div class="profile__info-wrapper">
@@ -100,9 +100,9 @@
         <h2 class="popup__title">Обновить аватар</h2>
         <form class="popup__form" name="popupAvatarForm" novalidate>
           <label class="popup__form-element">
-            <input id="photo-link-input" type="text" class="popup__item popup__item_el_link" name="avatar"
+            <input id="avatar-input" type="text" class="popup__item popup__item_el_link" name="avatar"
               placeholder="Ссылка на картинку" pattern="https?://.*\.(png|jpg|jpeg|gif)" required>
-            <span class="photo-link-input-error popup__input-error"></span>
+            <span class="avatar-input-error popup__input-error"></span>
           </label>
           <button class="popup__save-button" type="submit" disabled="true">Сохранить</button>
         </form>
