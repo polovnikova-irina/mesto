@@ -191,15 +191,6 @@ const renderCard = (data) => {
   section.addItem(cardElement);
 };
 
-//Открытие попапа автара
-const popupAvatar = new Popup(".popup_type_avatar");
-
-openPopupBtnAvatar.addEventListener("click", () => {
-  popupAvatar.open();
-  formElementEditAvatar.disableSubmitButton();
-  formElementEditAvatar.resetValidation();
-});
-
 // Обновление аватара
 const popupAddAvatar = new PopupWithForm(
   {
@@ -223,6 +214,13 @@ const popupAddAvatar = new PopupWithForm(
   ".popup_type_avatar"
 );
 popupAddAvatar.setEventListeners();
+
+//Открытие попапа автара
+openPopupBtnAvatar.addEventListener("click", () => {
+  popupAddAvatar .open();
+  formElementEditAvatar.disableSubmitButton();
+  formElementEditAvatar.resetValidation();
+});
 
 //выполнение Загрузка информации о пользователе с сервера и Добавление карточки с сервера
 Promise.all([api.getInfo(), api.getCards()])
