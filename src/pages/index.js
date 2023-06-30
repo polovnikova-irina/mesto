@@ -21,7 +21,7 @@ import UserInfo from "../scripts/components/UserInfo.js";
 import Api from "../scripts/components/api.js";
 import PopupDeleteCard from "../scripts/components/PopupDeleteCard.js";
 
-//класс Api
+//создание класса Api
 const api = new Api({
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-69",
   headers: {
@@ -51,7 +51,7 @@ const formElementEditAvatar = new FormValidator(
 );
 formElementEditAvatar.enableValidation();
 
-//userInfo
+//создание класса userInfo
 const userInfo = new UserInfo(infoConfig);
 
 //Принятие новых данных пользователя и добавление их на страницу
@@ -70,42 +70,19 @@ const popupProfile = new PopupWithForm(
           popupProfile.close();
         })
         .catch((err) => {
-          console.log("Ошибка:", err);
+          console.log("Ошибка при отправке данных пользователя:", err);
         })
         .finally(() => {
-          popupAddCard.renderLoading(false);
+          popupProfile.renderLoading(false);
         });
     },
   },
   ".popup_type_edit-profile"
 );
-
 popupProfile.setEventListeners();
-
-//Класс попап для реадактирования профиля
-const profileForm = new Popup(".popup_type_edit-profile");
-
-//Открытие попапа редактирования профиля и редактирование
-openPopupBtnEdit.addEventListener("click", () => {
-  formElementEditProfile.resetValidation();
-  formElementEditProfile.disableSubmitButton();
-  popupProfile.setInputValues(userInfo.getUserInfo());
-  profileForm.open();
-});
-profileForm.setEventListeners();
 
 //Увеличить карточку
 const popupWithImage = new PopupWithImage(".popup_type_zoom-image");
-
-//Открытие попапа добавления карточки
-const popupCard = new Popup(".popup_type_add-card");
-
-openPopupBtnAdd.addEventListener("click", () => {
-  popupCard.open();
-  formElementAddCard.disableSubmitButton();
-  formElementAddCard.resetValidation();
-});
-popupCard.setEventListeners();
 
 // Создание и добавление новых карточек при заполнении полей поп-апа
 const popupAddCard = new PopupWithForm(
@@ -120,7 +97,7 @@ const popupAddCard = new PopupWithForm(
           popupAddCard.close();
         })
         .catch((err) => {
-          console.log("Ошибка:", err);
+          console.log("Ошибка при создании карточки:", err);
         })
         .finally(() => {
           popupAddCard.renderLoading(false);
@@ -130,6 +107,21 @@ const popupAddCard = new PopupWithForm(
   ".popup_type_add-card"
 );
 popupAddCard.setEventListeners();
+
+//Открытие попапа добавления карточки
+openPopupBtnAdd.addEventListener("click", () => {
+  popupAddCard.open();
+  formElementAddCard.disableSubmitButton();
+  formElementAddCard.resetValidation();
+});
+
+//Открытие попапа редактирования профиля и редактирование
+openPopupBtnEdit.addEventListener("click", () => {
+  formElementEditProfile.resetValidation();
+  formElementEditProfile.disableSubmitButton();
+  popupProfile.setInputValues(userInfo.getUserInfo());
+  popupProfile.open();
+});
 
 //класс Section
 const section = new Section(
@@ -169,7 +161,6 @@ const renderCard = (data) => {
     handleCardClick: (data) => popupWithImage.open(data),
 
     handleDeleteClick: (cardElement, cardId) => {
-      console.log("handleDeleteClickcardData:", cardElement, cardId);
       popupDeleteCard.open(cardElement, cardId);
     },
 
@@ -208,7 +199,6 @@ openPopupBtnAvatar.addEventListener("click", () => {
   formElementEditAvatar.disableSubmitButton();
   formElementEditAvatar.resetValidation();
 });
-popupAvatar.setEventListeners();
 
 // Обновление аватара
 const popupAddAvatar = new PopupWithForm(
@@ -246,6 +236,6 @@ Promise.all([api.getInfo(), api.getCards()])
     });
   })
   .catch((err) => {
-    console.log("Ошибка при загрузке данных о пользователе:", err);
+    console.log("Ошибка при загрузке данных о пользователе или карточек:", err);
   })
   .finally();
